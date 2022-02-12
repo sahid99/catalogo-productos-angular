@@ -28,9 +28,37 @@ export class AdminComponent implements OnInit {
 
   loadCategories(){
     return this.restApi.getCategories().subscribe((data: any) => {
-      console.log(data);
       this.categories = data;
     })
+  }
+
+  createProductShell(){
+    this.selectedProduct = {
+      id: undefined,
+      name: '',
+      price: 0,
+      url: '',
+      description: '',
+      category: ''
+    }
+  }
+
+  saveProduct(){
+    if(this.selectedProduct){
+      if(this.selectedProduct.id){
+        return this.restApi.modifyProduct(this.selectedProduct).subscribe((data: any) => {
+          this.products = data;
+          this.selectedProduct = null;
+        })
+      }
+      else{
+        return this.restApi.addProduct(this.selectedProduct).subscribe((data: any) => {
+          this.products = data;
+          this.selectedProduct = null;
+        })
+      }
+    }
+    return null;
   }
 
   ngOnInit(): void {
