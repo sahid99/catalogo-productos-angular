@@ -4,6 +4,7 @@ import { Product } from '../shared/product';
 import { Observable, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
 import { User } from './user';
+import { Category } from './category';
 @Injectable({
   providedIn: 'root'
 })
@@ -75,16 +76,16 @@ export class RestApiService {
     )
   }
   // HttpClient API delete() method => Delete employee
-  deleteProduct(id: string){
-    return this.http.post<Product>(this.apiURL + '/products/deleteProduct', this.httpOptions)
+  deleteProduct(product: Product){
+    return this.http.post<Product>(this.apiURL + '/products/deleteProduct', JSON.stringify(product), this.httpOptions)
     .pipe(
       retry(1),
       catchError(this.handleError)
     )
   }
 
-  getCategories(): Observable<Product> {
-    return this.http.get<Product>(this.apiURL + '/categories/getCategories', this.httpOptions)
+  getCategories(): Observable<Category> {
+    return this.http.get<Category>(this.apiURL + '/categories/getCategories', this.httpOptions)
     .pipe(
       retry(1),
       catchError(this.handleError)

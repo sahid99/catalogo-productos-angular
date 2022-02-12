@@ -61,6 +61,13 @@ export class AdminComponent implements OnInit {
     return null;
   }
 
+  deleteProduct(product: Product){
+    return this.restApi.deleteProduct(product).subscribe((data: any) => {
+      this.products = data;
+      this.selectedProduct = null;
+    })
+  }
+
   ngOnInit(): void {
     this.loadProducts();
     this.loadCategories();
