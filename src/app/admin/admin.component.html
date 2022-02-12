@@ -1,0 +1,125 @@
+<div class="flex justify-center mb-12">
+  <div class="flex text-base text-left transform transition w-full md:inline-block md:max-w-2xl md:px-4 md:my-8 md:align-middle lg:max-w-4xl">
+    <div class="w-full relative flex items-center bg-white px-4 pt-14 pb-8 overflow-hidden shadow-2xl sm:px-6 sm:pt-8 md:p-6 lg:p-8">
+      <button type="button" class="absolute top-4 right-4 text-gray-400 hover:text-gray-500 sm:top-8 sm:right-6 md:top-6 md:right-6 lg:top-8 lg:right-8">
+        <span class="sr-only">Close</span>
+        <!-- Heroicon name: outline/x -->
+        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+  
+      <div class="w-full grid grid-cols-1 gap-y-8 gap-x-6 items-start sm:grid-cols-12 lg:gap-x-8">
+        <div class="aspect-w-2 aspect-h-3 rounded-lg bg-gray-100 overflow-hidden sm:col-span-4 lg:col-span-5">
+          <img [src]=" selectedProduct ? selectedProduct.url :'https://tailwindui.com/img/ecommerce-images/product-quick-preview-02-detail.jpg'" alt="Two each of gray, white, and black shirts arranged on table." class="object-center object-cover">
+        </div>
+        <div class="sm:col-span-8 lg:col-span-7">
+  
+          <section aria-labelledby="information-heading" class="mt-2">
+            <h3 id="information-heading" class="sr-only">Product information</h3>
+            
+            <div *ngIf="selectedProduct; else productName">
+              <div class="mb-4">
+                <label for="name" class="block text-sm font-medium text-gray-700">Nombre</label>
+                <div class="mt-1">
+                  <input type="text" [(ngModel)]="selectedProduct.name" name="name" id="name" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" placeholder="Nombre del producto">
+                </div>
+              </div>
+            </div>
+            
+            <ng-template #productName>
+              <h2 class="text-2xl font-extrabold text-gray-900 sm:pr-12">Producto Demo</h2>
+            </ng-template>
+  
+            <div *ngIf="selectedProduct; else productPrice">
+              <div>
+                <label for="price" class="block text-sm font-medium text-gray-700">Precio</label>
+                <div class="mt-1">
+                  <input type="text" [(ngModel)]="selectedProduct.price" name="price" id="price" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" placeholder="Nombre del producto">
+                </div>
+              </div>
+            </div>
+
+            <ng-template #productPrice>
+              <p class="text-2xl text-gray-900">$99</p>
+            </ng-template>
+  
+          </section>
+  
+          <section aria-labelledby="options-heading" class="mt-10">
+            <h3 id="options-heading" class="sr-only">Product options</h3>
+              <!-- Description -->
+              <div *ngIf="selectedProduct; else productDescription">
+                <label for="description" class="block text-sm font-medium text-gray-700">Descripcion de tu producto</label>
+                <div class="mt-1">
+                  <textarea [(ngModel)]="selectedProduct.description" rows="4" name="description" id="description" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"></textarea>
+                </div>
+              </div>
+              <ng-template #productDescription>
+              <div>
+                <h4 class="text-sm text-gray-900 font-medium">Descripcion</h4>
+                <div class="mt-4 space-y-6">
+                  <p class="text-sm text-gray-600">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Numquam quam quae nulla eius similique, dolores culpa voluptatem vitae quia pariatur quas ducimus voluptatum deleniti, laudantium illum expedita ullam dignissimos nisi?</p>
+                </div>
+              </div>
+              </ng-template>
+  
+              <!-- Category -->
+              <div class="mt-10">
+                <div *ngIf="selectedProduct; else productCategory">
+                  <label for="category" class="block text-sm font-medium text-gray-900">Categoria</label>
+                  <select id="category" [(ngModel)]="selectedProduct.category" name="category" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+                    <option *ngFor="let category of categories">{{category.name}}</option>
+                  </select>
+                </div>
+                <ng-template #productCategory>
+                <div class="mb-4 md:mb-10">
+                  <h4 class="text-sm text-gray-900 font-medium inline-flex mr-4">Categoria:</h4>
+                  <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800"> Todo </span>
+                </div>
+                </ng-template>
+              </div>
+  
+              <button type="submit" class="mt-6 w-full bg-indigo-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Guardar</button>
+          </section>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="flex flex-col">
+  <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+    <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+      <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+        <table class="min-w-full divide-y divide-gray-200">
+          <thead class="bg-gray-50">
+            <tr>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nombre</th>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Precio</th>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Url</th>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Descripcion</th>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Categoria</th>
+              <th scope="col" class="relative px-6 py-3">
+                <span class="sr-only">Edit</span>
+              </th>
+            </tr>
+          </thead>
+          <tbody class="bg-white divide-y divide-gray-200">
+            <tr *ngFor="let product of products">
+              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{product.name}}</td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{product.price}}</td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 max-w-xs truncate">{{product.url}}</td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{product.description}}</td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{product.category}}</td>
+              <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                <a (click)="selectProduct(product)" class="text-indigo-600 hover:text-indigo-900">Edit</a>
+              </td>
+            </tr>
+
+            <!-- More people... -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

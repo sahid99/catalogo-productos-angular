@@ -56,14 +56,23 @@
           <div class="py-1" role="none">
             <!-- Active: "bg-gray-100 text-gray-900", Not Active: "text-gray-700" -->
             <a
-              *ngFor="let category of categories"
-              (click)="selectCategory(category)"
+              (click)="selectCategory('Todo')"
               href="#"
               class="text-gray-700 block px-4 py-2 text-sm"
               role="menuitem"
               tabindex="-1"
               id="menu-item-0"
-              >{{ category }}</a
+              >Todo</a
+            >
+            <a
+              *ngFor="let category of categories"
+              (click)="selectCategory(category.name)"
+              href="#"
+              class="text-gray-700 block px-4 py-2 text-sm"
+              role="menuitem"
+              tabindex="-1"
+              id="menu-item-0"
+              >{{ category.name }}</a
             >
           </div>
         </div>
@@ -76,7 +85,7 @@
       <ng-container *ngFor="let product of products">
         <app-product
           *ngIf="
-            product.categories.includes(categorySelected) ||
+            product.category == categorySelected ||
             categorySelected == 'Todo'
           "
           [product]="product"
