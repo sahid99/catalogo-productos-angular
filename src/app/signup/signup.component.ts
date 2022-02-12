@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from '../shared/auth.service';
 import { RestApiService } from '../shared/rest-api.service';
 import { User } from '../shared/user';
 
@@ -15,11 +16,14 @@ export class SignupComponent implements OnInit {
     password: ''
   }
 
-  constructor(public restApi: RestApiService, public router: Router ) { }
+  constructor(public restApi: RestApiService, public router: Router, private authService: AuthService ) { }
 
   signUp(){
     this.restApi.signUp(this.user).subscribe((data: User) => {
-      data.token ? this.router.navigate(['/']) : ""
+      if(data.token){
+        this.authService.setToken(data.token);
+        this.router.navigate(['/'])
+      }
     })
   }
 

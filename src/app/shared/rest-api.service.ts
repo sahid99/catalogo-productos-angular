@@ -5,6 +5,7 @@ import { Observable, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
 import { User } from './user';
 import { Category } from './category';
+import { AuthService } from './auth.service';
 @Injectable({
   providedIn: 'root'
 })
@@ -12,7 +13,7 @@ export class RestApiService {
   
   // Define API
   apiURL = 'http://localhost:3000';
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private authService: AuthService) { }
   /*========================================
     CRUD Methods for consuming RESTful API
   =========================================*/
@@ -20,7 +21,7 @@ export class RestApiService {
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
-      'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InNhaGlkIiwiaWF0IjoxNjQ0NTkwNzQ3LCJleHAiOjE2NDQ3NjM1NDd9.QXMg6QCzE0Pzc3hoWfGDindVlgyZ5x1QXJISqCOy6G8'
+      'x-access-token': this.authService.getToken()
     })
   }  
 

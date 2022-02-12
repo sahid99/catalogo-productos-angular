@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthService } from './shared/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,19 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'catalogo-productos-angular';
+
+  isAuthenticated(){
+    if(this.authService.getAuthStatus()){
+      return true;
+    }else{
+      return false;
+    }
+  }
+
+  logout(){
+    this.authService.deleteToken();
+  }
+
+  constructor(
+    private authService: AuthService) { }
 }

@@ -42,13 +42,19 @@
             <div
               class="hidden md:flex items-center justify-end md:flex-1 lg:w-0"
             >
-              <a
+              <a *ngIf="isAuthenticated()"
+                (click)="logout()"
+                class="whitespace-nowrap text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md font-medium text-base"
+              >
+                Log Out
+              </a>
+              <a *ngIf="!isAuthenticated()"
                 href="/signin"
                 class="whitespace-nowrap text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md font-medium text-base"
               >
                 Sign in
               </a>
-              <a
+              <a *ngIf="!isAuthenticated()"
                 href="/signup"
                 class="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700"
               >
@@ -129,16 +135,22 @@
         </div>
         <div class="py-6 px-5">
           <div>
-            <a
+            <a *ngIf="!isAuthenticated()"
               href="/signin"
               class="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700"
             >
-              Sign up
+              Sign in
             </a>
-            <p class="mt-6 text-center text-base font-medium text-white">
-              Existing customer?
+            <p *ngIf="!isAuthenticated()" class="mt-6 text-center text-base font-medium text-white">
+              Tienes cuenta?
               <a href="/signup" class="text-indigo-600 hover:text-indigo-500">
-                Sign in
+                Sign up
+              </a>
+            </p>
+            <p *ngIf="!isAuthenticated()" class="mt-6 text-center text-base font-medium text-white">
+              Quieres salir?
+              <a (click)="logout()" class="text-indigo-600 hover:text-indigo-500">
+                Log out
               </a>
             </p>
           </div>
