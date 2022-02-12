@@ -90,7 +90,22 @@ export class RestApiService {
       retry(1),
       catchError(this.handleError)
     )
-  }  
+  } 
+  addCategory(category: Category): Observable<Category> {
+    return this.http.post<Category>(this.apiURL + '/categories/addCategory', JSON.stringify(category), this.httpOptions)
+    .pipe(
+      retry(1),
+      catchError(this.handleError)
+    )
+  }
+  
+  deleteCategory(category: Category): Observable<Category> {
+    return this.http.post<Category>(this.apiURL + '/categories/deleteCategory', JSON.stringify(category), this.httpOptions)
+    .pipe(
+      retry(1),
+      catchError(this.handleError)
+    )
+  }
 
   // Error handling 
   handleError(error: any) {

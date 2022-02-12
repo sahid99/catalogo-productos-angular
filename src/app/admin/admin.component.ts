@@ -12,7 +12,11 @@ export class AdminComponent implements OnInit {
 
   products: Product[] = []; 
   
-  selectedProduct: Product | null = null; 
+  selectedProduct: Product | null = null;
+  
+  category: Category = {
+    name: ''
+  };
 
   categories: Category[] = [];
 
@@ -65,6 +69,24 @@ export class AdminComponent implements OnInit {
     return this.restApi.deleteProduct(product).subscribe((data: any) => {
       this.products = data;
       this.selectedProduct = null;
+    })
+  }
+
+  addCategory(){
+    return this.restApi.addCategory(this.category).subscribe((data: any) => {
+      this.categories = data;
+      this.category = {
+        name: ''
+      };
+    })
+  }
+
+  deleteCategory(category: Category){
+    return this.restApi.deleteCategory(category).subscribe((data: any) => {
+      this.categories = data;
+      this.category = {
+        name: ''
+      };
     })
   }
 
